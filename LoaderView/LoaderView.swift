@@ -5,16 +5,30 @@
 //  Created by Alex on 18/07/2023.
 //
 
+import Foundation
+import UIKit
 import SwiftUI
 
-struct LoaderView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct LoaderView: UIViewRepresentable {
+    @Binding var animate: Bool
+    
+    func makeUIView(context: Context) -> UIActivityIndicatorView {
+        let activityView = UIActivityIndicatorView(style: .large)
+        activityView.hidesWhenStopped = false
+        activityView.color = .blue
+        activityView.startAnimating()
+        return activityView
     }
-}
-
-struct LoaderView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoaderView()
+    
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: Context) {
+        if animate {
+            uiView.startAnimating()
+        } else {
+            uiView.stopAnimating()
+        }
     }
+    
+    typealias UIViewType = UIActivityIndicatorView
+    
+    
 }

@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var animate = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            LoaderView(animate: $animate)
+            Button {
+                self.animate.toggle()
+            } label: {
+                Text(animate ? "Stop" : "Start")
+            }
+
         }
-        .padding()
     }
 }
 
